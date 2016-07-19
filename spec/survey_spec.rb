@@ -1,7 +1,6 @@
 require('spec_helper')
 
 describe(Survey) do
-  #
 
   it("capitalizes the name of a survey") do
     survey = Survey.create({:name => "What language?"})
@@ -9,17 +8,17 @@ describe(Survey) do
     end
 
 
-  # it("validates the presence of a descriptor") do
-  #   survey = Survey.new({:name => " "})
-  #   expect(list.save()).to(eq(false))
-  # end
+  it("validates the presence of a descriptor") do
+    survey = Survey.new({:name => " "})
+    expect(survey.save()).to(eq(false))
+  end
 
-  # describe('#questions') do
-  #   it('tells which questions are in it') do
-  #     tsurvey1 = Survey.create({:name => "survey"})
-  #     tquestion1 = Question.create({:question => "question 1", :survey_id => survey_id.id})
-  #     tquestion2 = Question.create({:question => "question 2", :survey_id => survey_id.id})
-  #     expect(tsurvey1.questions()).to(eq([tquestion1, tquestion2]))
-  #   end
-  # end
+  describe('#questions') do
+    it('tells which questions are in the survey') do
+      tsurvey1 = Survey.create({:name => "survey"})
+      tquestion1 = Question.create({:question => "question 1", :survey_id => tsurvey1.id()})
+      tquestion2 = Question.create({:question => "question 2", :survey_id => tsurvey1.id()})
+      expect(tsurvey1.questions()).to(eq([tquestion1, tquestion2]))
+    end
+  end
 end
