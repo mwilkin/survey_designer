@@ -7,9 +7,13 @@ describe(Survey) do
     expect(survey.name()).to(eq("WHAT LANGUAGE?"))
     end
 
-
   it("validates the presence of a descriptor") do
     survey = Survey.new({:name => " "})
+    expect(survey.save()).to(eq(false))
+  end
+
+  it("ensures the length of survey name is at most 30 characters") do
+    survey = Survey.new({:name => "a".*(31)})
     expect(survey.save()).to(eq(false))
   end
 
